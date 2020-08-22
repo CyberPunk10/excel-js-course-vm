@@ -1,0 +1,13 @@
+<svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+	<style>
+		.cls-1{
+			fill:none;
+			stroke:#444;
+			stroke-linecap:round;
+			stroke-linejoin:round;
+			stroke-width:2px;
+		}
+	</style>
+	<line class="cls-1" x1="1" x2="47" y1="47" y2="1"/>
+	<line class="cls-1" x1="1" x2="47" y1="1" y2="47"/>
+</svg>

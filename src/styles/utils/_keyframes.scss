@@ -1,0 +1,10 @@
+/* src\styles\utils\_keyframes.scss */
+
+@keyframes blinker {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

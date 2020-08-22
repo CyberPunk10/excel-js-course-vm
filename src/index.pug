@@ -1,0 +1,26 @@
+doctype html
+html(lang='ru')
+  head
+
+    //- Meta
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+
+    //- font-awesome (шрифт иконок)
+    link(src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css")
+    //- link(src="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+
+    title Your project!
+
+  body
+    #app
+      .exel
+        include ./components/header/header
+        include ./components/toolbar/toolbar
+        //- include ./components/formula/formula
+        //- include ./components/table/table
+
+      p
+        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt libero ducimus vel quisquam commodi dolor non officia voluptate excepturi ea.
