@@ -1,0 +1,33 @@
+.header
+  $height-header: 3.4rem
+  $border-color-blue: #1a73e8
+  $border-color: #c0c0c0
+  
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  height: $height-header
+  padding: .8rem .4rem 0
+  display: flex
+  justify-content: space-between
+
+  background-color: #fff
+
+
+  &__input
+    padding: .2rem .7rem
+    color: #222
+    border: 2px solid trasparent
+    border-redius: 2px
+    height: 2rem
+    font-size: 1.8rem
+    line-height: 2.2rem
+    outline: none
+    &:hover
+      border: 2px solid $border-color
+    &:focus
+      border: 2px solid $border-color-blue
+
+
+  &__button

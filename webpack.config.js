@@ -187,7 +187,7 @@ module.exports = {
     // }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: 'index.html',
+      template: 'index.pug',
       // template: 'index.pug',
       // inject: false             // если оставить false, то внутри не будут генерироваться  пути с именами, включающими [hash].. вроде так
     }),

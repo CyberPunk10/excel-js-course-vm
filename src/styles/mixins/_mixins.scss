@@ -1,0 +1,79 @@
+  
+/* src\styles\mixins\_mixins.scss */
+
+@mixin isFlex($justify: center, $align: center, $direction: row, $wrap: nowrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+  flex-direction: $direction;
+}
+  
+@mixin bgImage($url, $repeat: no-repeat, $position: center, $size: initial) {
+  background-image: url($url);
+  background-repeat: $repeat;
+  background-position: $position;
+  background-size: $size;
+}
+  
+@mixin container($width: 1440, $margin: auto, $padding: 0) {
+  max-width: $width + px;
+  margin: $margin;
+  padding: $padding;
+}
+  
+@mixin link($color: $blue, $weight: 400, $fontSize: 14, $hoverColor: $red) {
+  color: $color;
+  transition: .2s;
+  font-weight: $weight;
+  font-size: $fontSize + px;
+
+  &:hover {
+    color: $hoverColor;
+  }
+
+}
+
+// Для градиента значения по умолчанию
+
+@mixin linear-gradient($direction: 180deg, $fromColor: #BC9CFF, $toColor: #8BA4F9) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, $direction, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient($direction, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image:    -moz-linear-gradient($direction, $fromColor, $toColor); /* FF3.6 */
+  background-image:     -ms-linear-gradient($direction, $fromColor, $toColor); /* IE10 */
+  background-image:      -o-linear-gradient($direction, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image:         linear-gradient($direction, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+@mixin text-linear-gradient($direction: 180deg, $fromColor: #BC9CFF, $toColor: #8BA4F9) {
+  // ниже 4 строчки нужны для градиента текста (https://html5book.ru/gradient-dlya-teksta/)
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: $color-purple;
+  @include linear-gradient;
+}
+
+@mixin font-how-h3($color: $color-dark-shade-100) {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: $Montserrat;
+  font-weight: bold;
+  color: $color;
+}
+
+// special for .text-field & .drop-btn
+@mixin text-field-and-drop-btn {
+  background: #FFFFFF;
+  border: 1px solid $color-dark-shade-25;
+  border-radius: 4px;
+  padding: 1.2rem 1.5rem;
+  width: 100%;
+  font-size: 1.4rem;
+  font-family: $Montserrat;
+  color: $color-dark-shade-75;
+  transition: 0.2s ease all;
+}
+
+
