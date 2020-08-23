@@ -1,0 +1,79 @@
+.db
+
+  &__header
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    height: $height-db-header
+    display: flex
+    justify-content: center
+    align-items: center
+    background-color: #fff
+    box-shadow: 0 2px 5px 2px rgba(60, 64, 67, .15)
+    // z-index: 1000
+
+  &__view
+    display: flex
+    justify-content: center
+
+  &__new
+    margin-top: $height-db-header
+    padding: 1.5rem
+    background-color: #dadce0
+
+  &__create
+    width: 16rem
+    height: 16rem
+    padding: .5rem
+    margin: 0 .5rem
+    background-color: #fff
+    border-radius: 4px
+    border: 1px solid #dadce0
+    display: flex
+    justify-content: center
+    align-items: center
+    font-size: 2.1rem
+    text-align: center
+    text-decoration: none
+    color: $color-dark-shade-75
+
+    &:hover
+      color: $green
+      border-color: $green
+
+  &__table
+    max-width: 100rem
+    margin: 0 auto
+
+  &__list-header
+    display: flex
+    justify-content: space-between
+    font-weight: 500
+    font-size: 1.6rem
+    margin-bottom: 1rem
+    padding: 0 2.6rem
+
+  &__list
+    margin-bottom: 1rem
+    padding: 0 1.2rem
+  
+  &__record
+    display: flex
+    justify-content: space-between
+    align-items: center
+    padding: 1.2rem 1.4rem
+    border-radius: 25px
+    transition: .5s all cubic-bezier(0.075, 0.82, 0.165, 1)
+
+    &:hover
+      background-color: #f0f2f5
+    
+    a:hover
+      text-decoration: underline
+
+
+      
+
+
+

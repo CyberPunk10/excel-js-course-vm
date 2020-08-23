@@ -1,0 +1,25 @@
+.formula
+  position: absolute
+  left: 0
+  right: 0
+  top: calc( #{$height-header} + #{$height-toolbar} )
+  height: $height-formula
+  display: flex
+  align-items: center
+  border-bottom: 1px solid $border-color
+
+  &__info
+    font-size: 1.8rem
+    font-style: italic
+    text-align: center
+    border-right: 1px solid $border-color
+    min-width: $width-info-cell
+    color: $color-dark-shade-25
+
+  &__input
+    padding: .4rem
+    font-size: 1.2rem
+    line-height: calc( #{$height-formula} - .8rem)
+    outline: none
+    width: 100%
+    height: 100%

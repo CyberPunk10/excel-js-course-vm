@@ -1,0 +1,61 @@
+.table
+  position: absolute
+  left: 0
+  right: 0
+  top: calc( #{$height-header} + #{$height-toolbar} + #{$height-formula} )
+  overflow-x: auto
+  padding-bottom: 2px // чтобы outline был виден полностью при add .selected
+
+  &__row
+    display: flex
+    flex-direction: row
+    min-height: 2rem
+    height: $height-table-row
+
+  &__row-info
+    display: flex
+    justify-content: center
+    align-items: center
+    min-width: $width-info-cell
+    height: 100%
+    border: 1px solid $border-color
+    background-color: #f8f9fa
+    border-top: none
+    user-select: none
+
+  &__row-data
+    display: flex
+
+  &__column
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 100%
+    width: $width-cell
+    min-width: $width-info-cell
+    background-color: #f8f9fa
+    border: 1px solid $border-color
+    border-top: none
+    border-left: none
+    user-select: none
+
+
+
+  &__cell
+    display: flex
+    padding: 0.4rem
+    height: 100%
+    width: $width-cell
+    min-width: $width-info-cell
+    border: 1px solid $border-color
+    border-top: none
+    border-left: none
+    white-space: nowrap
+
+    &.selected
+      border: none
+      outline: 2px solid #3c74ff !important
+      z-index: 2
+
+
+  
