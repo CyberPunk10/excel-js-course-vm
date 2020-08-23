@@ -1,10 +1,10 @@
 /* src/styles/common/_general.scss  */
 
+@import '~normalize.css'
+
 * 
   box-sizing: border-box
-  outline: none
-  margin: 0
-  padding: 0
+  // outline: none
 
 html,
 body 
@@ -14,20 +14,19 @@ html
   font-size: 10px     // 1rem = 10px
 
 body
-  background-color: #e5e5e5
+  // background-color: #e5e5e5
   font-size: 14px
   -webkit-font-smoothing: antialiased
   font-family: 'Roboto', sans-serif
-  background-color: gray
+  // line-height: 1.45
 
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 
-  margin: 0
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 
+//   margin: 0
 
 a 
   display: inline-block
@@ -43,19 +42,15 @@ ul
 li 
   list-style: none
 
-
-// body 
-  // line-height: 1.45
-
 .exel
   position: relative
+  color: $color-dark-shade-75
+  height: 100%
+  max-width: 100%
+  font-size: 1.4rem
+
 
 @media screen and ( max-width: 420px )
   body
     background-color: $color-purple
     background-color: $color-dark-shade-75
-
-
-// temp
-p
-  color: #eee
