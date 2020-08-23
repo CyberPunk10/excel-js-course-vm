@@ -1,5 +1,8 @@
 export class DomListener {
-  constructor(test) {
-    this.test = test
+  constructor($root) {
+    if (!$root) {
+      throw new ErrorEvent('No $root provided for DomListener')
+    }
+    this.$root = $root
   }
 }
