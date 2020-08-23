@@ -93,6 +93,15 @@ module.exports = {
     // publicPath: "/"                // для dev-server (если включить, то будет преоритетнее, чем 'contentBase' в настройках devServer)
   },
 
+  // resolve
+  resolve: {
+    extension: ['.js'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@core': path.resolve(__dirname, 'src/core')
+    }
+  },
+
   // dev-server configuration
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
