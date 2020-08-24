@@ -11,8 +11,9 @@
     "arrow-parens": "off",
     "comma-dangle": "off",
     "linebreak-style": "off",
-    "max-len": ["error", { "ignoreComments": true }],
-    "require-jsdoc": "off"
+    "max-len": ["error", { "ignoreComments": true , "ignoreTrailingComments": true , "ignoreUrls": true , "ignoreTemplateLiterals": true }],
+    "require-jsdoc": "off",
+    "operator-linebreak": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }

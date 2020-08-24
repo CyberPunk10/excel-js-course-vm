@@ -9,5 +9,4 @@ const excel = new Excel('#app', {
   components: [Header, Toolbar, Formula, Table]
 })
 
-// console.log('Excel: ', excel)
 excel.render('<h1>Title</h1>')
