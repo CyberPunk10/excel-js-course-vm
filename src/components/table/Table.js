@@ -5,7 +5,7 @@ export class Table extends ExcelComponent {
   static className = 'excel-table'
 
   toHTML(selector) {
-    selector.innerHTML = createTable()
+    selector.innerHTML = createTable(12)
     return selector
   }
 }
