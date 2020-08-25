@@ -18,6 +18,10 @@ class Dom {
     this.html('')
     return this
   }
+
+  on(eventType, fn) {
+    this.$el.addEventListener(eventType, fn)
+  }
 }
 
 export function $(selector) {

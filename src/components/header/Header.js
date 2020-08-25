@@ -1,9 +1,13 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
 export class Header extends ExcelComponent {
-  // constructor (selector) {
-  //   this.$el = selector
-  // }
+  constructor($root) {
+    super($root, {
+      name: 'Header',
+      listeners: ['input', 'click']
+    })
+  }
+
   static className = 'excel-header'
 
   toHTML(selector) {
@@ -15,5 +19,17 @@ export class Header extends ExcelComponent {
       </div>
     `
     return selector
+  }
+
+  onInput(event) {
+    console.log('[Header] Listener: input', event.target.value.trim())
+    // console.log(event.target.textContent)
+    console.log(this.$root)
+  }
+
+  onClick(event) {
+    console.log('[Header] Listener: click', event.target)
+    // console.log(event.target.textContent)
+    console.log(this.$root)
   }
 }

@@ -6,7 +6,7 @@ export class Formula extends ExcelComponent {
   toHTML(selector) {
     selector.innerHTML = `
       <div class="excel-formula__info">fx</div>
-      <div class="excel-formula__input" contenteditable="contenteditable" spellcheck="false"></div>
+      <div class="excel-formula__input" contenteditable spellcheck="false"></div>
     `
     return selector
   }
