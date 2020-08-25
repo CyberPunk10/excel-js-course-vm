@@ -25,6 +25,8 @@
 
   &__row-data
     display: flex
+    &:hover
+      background-color: rgba(0,0,255,.02)
 
   &__column
     display: flex
@@ -51,6 +53,8 @@
     border-top: none
     border-left: none
     white-space: nowrap
+    // outline: none по умолчанию красивый outline, только цвет сменить
+    outline-color: #3c74ff
 
     &.selected
       border: none
