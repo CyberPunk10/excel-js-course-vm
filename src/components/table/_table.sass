@@ -12,7 +12,8 @@
     min-height: 2rem
     height: $height-table-row
 
-  &__row-info
+  &__row-info, &__column
+    position: relative
     display: flex
     justify-content: center
     align-items: center
@@ -21,7 +22,15 @@
     border: 1px solid $border-color
     background-color: #f8f9fa
     border-top: none
-    user-select: none
+    user-select: none 
+
+  &__row-info   
+    .row-resize
+      left: -1px
+      right: -1px
+      height: .5rem
+      &:hover
+        cursor: n-resize
 
   &__row-data
     display: flex
@@ -29,19 +38,15 @@
       background-color: rgba(0,0,255,.02)
 
   &__column
-    display: flex
-    justify-content: center
-    align-items: center
-    height: 100%
-    width: $width-cell
-    min-width: $width-info-cell
-    background-color: #f8f9fa
-    border: 1px solid $border-color
-    border-top: none
     border-left: none
-    user-select: none
+    width: $width-cell
 
-
+    .col-resize
+      top: 0
+      right: 0
+      width: .5rem
+      &:hover
+        cursor: e-resize
 
   &__cell
     display: flex
@@ -54,12 +59,17 @@
     border-left: none
     white-space: nowrap
     // outline: none по умолчанию красивый outline, только цвет сменить
-    outline-color: #3c74ff
+    outline-color: $color-primary
 
     &.selected
       border: none
-      outline: 2px solid #3c74ff !important
+      outline: 2px solid $color-primary !important
       z-index: 2
 
-
-  
+  .row-resize, .col-resize
+    position: absolute
+    bottom: -1px
+    background-color: $color-primary
+    opacity: 0
+    &:hover
+      opacity: 1  
