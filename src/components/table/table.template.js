@@ -24,8 +24,11 @@ function createRow(numberRow) {
   }
 
   const html = `
-    <div class="excel-table__row">
-      <div class="excel-table__row-info">${numberRow ? numberRow : ''}</div>
+    <div class="excel-table__row" ${numberRow ? 'data-type="resizable"' : ''}>
+      <div class="excel-table__row-info">
+        ${numberRow ? numberRow : ''}
+        ${numberRow ? '<div class="row-resize" data-resize="row"></div>' : ''}
+      </div>
       <div class="excel-table__row-data">${fullCol}</div>
     </div>
   `
@@ -35,7 +38,10 @@ function createRow(numberRow) {
 function createCol(charCode) {
   if (charCode) {
     return `
-      <div class="excel-table__column">${toChar(charCode)}</div>
+      <div class="excel-table__column" data-type="resizable">
+        ${toChar(charCode)}
+        <div class="col-resize" data-resize="col"></div>
+      </div>
     `
   }
   return `
