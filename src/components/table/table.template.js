@@ -8,7 +8,8 @@ export function createTable(rowsCount = 21) {
 
 const CODES = {
   'A': 65,
-  'Z': 90
+  'Z': 90,
+  'varForIndex': 64
 }
 
 function toChar(charCode) {
@@ -20,7 +21,7 @@ function createRow(numberRow) {
   let fullCol = ''
 
   for (let i = 0; i <= colsCount; i++) {
-    fullCol += (numberRow === 0) ? createCol(CODES.A + i) : createCol()
+    fullCol += createCol(numberRow, CODES.A + i)
   }
 
   const html = `
@@ -35,16 +36,17 @@ function createRow(numberRow) {
   return html
 }
 
-function createCol(charCode) {
-  if (charCode) {
+function createCol(numberRow, charCode) {
+  if (!numberRow) { // если это 0-вая строка, то записывем в неё charCode
     return `
-      <div class="excel-table__column" data-type="resizable">
+      <div class="excel-table__column" data-type="resizable" data-number-col="${charCode - CODES.varForIndex}">
         ${toChar(charCode)}
         <div class="col-resize" data-resize="col"></div>
       </div>
     `
   }
+
   return `
-    <div class="excel-table__cell" contenteditable></div>
-  `
+  <div class="excel-table__cell" contenteditable data-number-col="${charCode - CODES.varForIndex}"></div>
+`
 }
