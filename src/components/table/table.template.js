@@ -47,6 +47,6 @@ function createCol(numberRow, charCode) {
   }
 
   return `
-  <div class="excel-table__cell" contenteditable data-number-col="${charCode - CODES.varForIndex}"></div>
+  <div class="excel-table__cell" contenteditable data-number-col="${charCode - CODES.varForIndex}" data-number-row="${numberRow}"></div>
 `
 }
