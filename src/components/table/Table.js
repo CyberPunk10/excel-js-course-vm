@@ -1,6 +1,7 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 import { createTable } from './table.template'
 import { resizeHandler } from './table.resize'
+import { TableSelection } from './TableSelection'
 
 export class Table extends ExcelComponent {
   static className = 'excel-table'
@@ -12,6 +13,16 @@ export class Table extends ExcelComponent {
     })
   }
 
+  // этот метод выполняется до  метода init, а значит здесь мы можем подготовить данные для init
+  prepare() {
+    this.selection = new TableSelection(this.$root)
+  }
+
+  init() {
+    super.init() // вызов родительского метода (иначе будет перезатирание)
+    const $cell = this.$root.querySelector('[data-row-col="1:1"]')
+    this.selection.select($cell)
+  }
   toHTML(selector) {
     selector.innerHTML = createTable(24)
     return selector
@@ -26,6 +37,12 @@ export class Table extends ExcelComponent {
     // console.log('mousedown', event.target.dataset) // второй вариант, который возвращает объект с data-атрибутами
     if (event.target.dataset.resize) {
       resizeHandler(this.$root)
+    } else if (event.target.dataset.rowCol) {
+      if (event.shiftKey) {
+        this.selection.selectGroup(event.target)
+      } else {
+        this.selection.select(event.target)
+      }
     }
   }
 
