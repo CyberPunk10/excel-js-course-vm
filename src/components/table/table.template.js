@@ -25,7 +25,7 @@ function createRow(numberRow) {
   }
 
   const html = `
-    <div class="excel-table__row" ${numberRow ? 'data-type="resizable"' : ''}>
+    <div class="excel-table__row" ${numberRow ? 'data-type="resizable"' : ''}  data-number-row="${numberRow}">
       <div class="excel-table__row-info">
         ${numberRow ? numberRow : ''}
         ${numberRow ? '<div class="row-resize" data-resize="row"></div>' : ''}
@@ -37,16 +37,16 @@ function createRow(numberRow) {
 }
 
 function createCol(numberRow, charCode) {
+  const numberCol = charCode - CODES.varForIndex
   if (!numberRow) { // если это 0-вая строка, то записывем в неё charCode
     return `
-      <div class="excel-table__column" data-type="resizable" data-number-col="${charCode - CODES.varForIndex}">
+      <div class="excel-table__column" data-type="resizable" data-number-col="${numberCol}">
         ${toChar(charCode)}
         <div class="col-resize" data-resize="col"></div>
       </div>
     `
   }
-
   return `
-  <div class="excel-table__cell" contenteditable data-number-col="${charCode - CODES.varForIndex}" data-number-row="${numberRow}"></div>
+  <div class="excel-table__cell" contenteditable data-number-col="${numberCol}" data-row-col="${numberRow}:${numberCol}"></div>
 `
 }

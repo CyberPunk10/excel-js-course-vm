@@ -58,13 +58,24 @@
     border-top: none
     border-left: none
     white-space: nowrap
-    // outline: none по умолчанию красивый outline, только цвет сменить
-    outline-color: $color-primary
+    outline: none
 
     &.selected
+      position: relative
       border: none
-      outline: 2px solid $color-primary !important
-      z-index: 2
+      // outline: 2px solid $color-primary !important
+      &:after
+        position: absolute
+        content: ''
+        top: -2px
+        left: -2px
+        right: -1px
+        bottom: -1px
+        border: 2px solid $color-primary
+        border-radius: 2px
+
+    &.selected-group
+      background-color: rgba(60, 116, 255,.1)
 
   .row-resize, .col-resize
     position: absolute

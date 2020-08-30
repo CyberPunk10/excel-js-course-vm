@@ -5,7 +5,7 @@ export function resizeHandler($root) {
   const targetCol = $parent.getAttribute('data-number-col') // номер колонки
   const targetRow = $parent.textContent.trim() // номер строки
   const targetColCells = $root.querySelectorAll(`[data-number-col="${targetCol}"`) // массив ячеек нужной колонки
-  const targetRowCells = $root.querySelectorAll(`[data-number-row="${targetRow}"`) // массив ячеек нужной колонки
+  const targetRowCells = $parent.querySelectorAll(`[data-row-col="${targetRow}:${targetCol}"`) // массив ячеек нужной колонки
 
   const coords = $parent.getBoundingClientRect()
   const coordsTt = $target.getBoundingClientRect()

@@ -35,3 +35,12 @@ $.create = (tagName, classes = '') => {
   }
   return el
 }
+
+// принимает ячейку, возвращает объект, в котром укзано местоположение ячейки (row && col)
+$.parsedRowCol = $el => {
+  const parsed = $el.dataset.rowCol.split(':')
+  return {
+    row: +parsed[0],
+    col: +parsed[1]
+  }
+}
