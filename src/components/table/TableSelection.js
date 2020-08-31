@@ -25,52 +25,36 @@ export class TableSelection {
   }
 
   selectGroup(target) {
-    // if (this.group.length > 1) {
-    //   this.group.pop()
-    //   this.group.push($el)
-    //   console.log(this.group)
-    // } else {
-    //   this.group.push($el)
-    //   console.log(this.group)
-    // }
-    const startParsed = ($.parsedRowCol(this.startCell))
-    const targetParsed = ($.parsedRowCol(target))
-    console.log(startParsed)
-    console.log(targetParsed)
-    const cols = range(startParsed.col, targetParsed.col)
-    const rows = range(startParsed.row, targetParsed.row)
-    console.log(cols, rows)
+    const startParsed = ($.parsedRowCol(this.startCell)) // {row: 1, col: 1} стартовая ячейка
+    const targetParsed = ($.parsedRowCol(target)) // {row: 2, col: 2} текущая ячейка
+    const rows = range(startParsed.row, targetParsed.row) // [1, 2] массив с номерами строк
+    const cols = range(startParsed.col, targetParsed.col) // [1, 2] массив с номерами колонок
 
-    const rowsC = []
-    for (let i = 0; i <= rows; i++) {
-      console.log(i)
-      console.log(this.$root.querySelector(`[data-number-row="${i}"]`))
-      // console.log(this.$root.querySelector(`[data-number-row="${i}"]`))
-      // if (this.$root.querySelectorAll(`[data-number-row="${i}"]`)) {
-      //   console.log(i)
-      //   for (let j = cols; j <= cols; j++) {
-      //     console.log(this.$root)
-      //     this.$root.querySelectorAll(`[data-row-col="${i}:${j}"]`).classList.add('selected-group')
-      //   }
-      // }
-    }
-    console.log(rowsC)
-    function range(start, end) {
-      return new Array(end - start + 1)
-          .fill('')
-          .map( (_, index) => start + index)
-    }
-    // parsedRowCol($el) {
-    //   const parsed = $el.dataset.rowCol.split(':')
-    //   return {
-    //     row: parsed[0],
-    //     col: parsed[1]
+    // 1 способ
+    // for (let i = 0; i <= rows.length; i++) {
+    //   for (let j = 0; j <= rows.length; j++) {
+    //     const $cell = this.$root.querySelector(`[data-number-row="${rows[i]}"] .excel-table__row-data [data-row-col="${rows[i]}:${cols[j]}"]`)
+    //     // const $cell = this.$root.querySelector(`[data-row-col="${rows[i]}:${cols[j]}"]`)
+    //     if ($cell) {
+    //       $cell.classList.add('selected-group')
+    //     }
     //   }
     // }
-    // console.log(this.$root)
 
-    // let startCol = startCol.slice(0, (startCol.indexOf(':')))
-    // let finishCol = finishCol.slice((startCol.indexOf(':')))
-    // $el.classList.add(TableSelection.className)
+    // 2 способ
+    const rowCols = cols.reduce((acc, col) => {
+      rows.forEach(row => acc.push(`${row}:${col}`))
+      return acc
+    }, [])
+    console.log(rowCols)
+
+    function range(start, end) {
+      const lengthArr = (start <= end) ? end - start + 1 : start - end + 1
+      const firstNum = (start <= end) ? start : end
+      return new Array(lengthArr) // в скобках задаем длину массива
+          .fill('')
+          .map( (_, index) => firstNum + index)
+    }
   }
 }
+
