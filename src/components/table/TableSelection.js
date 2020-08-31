@@ -17,14 +17,19 @@ export class TableSelection {
   }
 
   // очищает массив выбранных ячеек и удаляет класс .selected
-  clear() {
-    this.group.forEach(el => {
-      el.classList.remove('selected')
-    })
-    this.group = []
+  clear(group) {
+    // if (group) {
+    //   this.group.forEach(el => el.classList.remove('selected-group'))
+    // } else {
+    //   console.log(this.group)
+    //   this.group.forEach(el => el.classList.remove(`selected`, 'selected-group'))
+    // }
+    // this.group = []
   }
 
   selectGroup(target) {
+    this.clear('group')
+
     const startParsed = ($.parsedRowCol(this.startCell)) // {row: 1, col: 1} стартовая ячейка
     const targetParsed = ($.parsedRowCol(target)) // {row: 2, col: 2} текущая ячейка
     const rows = range(startParsed.row, targetParsed.row) // [1, 2] массив с номерами строк
@@ -46,7 +51,8 @@ export class TableSelection {
       rows.forEach(row => acc.push(`${row}:${col}`))
       return acc
     }, [])
-    console.log(rowCols)
+    this.group = rowCols.map(id => this.$root.querySelector(`[data-row-col="${id}"]`))
+    this.group.forEach(el => el.classList.add('selected-group'))
 
     function range(start, end) {
       const lengthArr = (start <= end) ? end - start + 1 : start - end + 1
