@@ -25,7 +25,7 @@ function createRow(numberRow) {
   }
 
   const html = `
-    <div class="excel-table__row" ${numberRow ? 'data-type="resizable"' : ''}  data-number-row="${numberRow}">
+    <div class="excel-table__row" ${numberRow ? 'data-type="resizable"' : ''} data-number-row="${numberRow}" id="row-${numberRow}">
       <div class="excel-table__row-info">
         ${numberRow ? numberRow : ''}
         ${numberRow ? '<div class="row-resize" data-resize="row"></div>' : ''}
