@@ -9,7 +9,7 @@ export class Table extends ExcelComponent {
   constructor($root) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown']
+      listeners: ['mousedown', 'keydown']
     })
   }
 
@@ -46,6 +46,25 @@ export class Table extends ExcelComponent {
     }
   }
 
+  onKeydown(event) {
+    const keys = [
+      'Enter',
+      'Tab',
+      'ArrowLeft',
+      'ArrowRight',
+      'ArrowDown',
+      'ArrowUp'
+    ]
+
+    if (keys.includes(event.key)) {
+      event.preventDefault()
+      console.log(event.key)
+      console.log(event.target)
+      console.log(this.$root)
+      nextCellSelection(event.target)
+    }
+  }
+
   // onMousemove(event) {
   //   console.log('mousemove', event.target)
   // }
@@ -53,4 +72,10 @@ export class Table extends ExcelComponent {
   // onMouseup(event) {
   //   console.log('mouseup', event.target)
   // }
+}
+
+function nextCellSelection($target) {
+  // const row = $target.dataset.rowCol.split(':')[0]
+  // const numberNextCol = ++$target.dataset.rowCol.split(':')[1]
+  // return $root.querySelector(`[data-row-col="${row}:${numberNextCol}"]`)
 }
