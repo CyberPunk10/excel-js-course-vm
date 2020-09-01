@@ -18,13 +18,12 @@ export class TableSelection {
 
   // очищает массив выбранных ячеек и удаляет класс .selected
   clear(group) {
-    // if (group) {
-    //   this.group.forEach(el => el.classList.remove('selected-group'))
-    // } else {
-    //   console.log(this.group)
-    //   this.group.forEach(el => el.classList.remove(`selected`, 'selected-group'))
-    // }
-    // this.group = []
+    if (group) {
+      this.group.forEach(el => el.classList.remove('selected-group'))
+    } else {
+      this.group.forEach(el => el.classList.remove(`selected`, 'selected-group'))
+    }
+    this.group = []
   }
 
   selectGroup(target) {
@@ -36,31 +35,29 @@ export class TableSelection {
     const cols = range(startParsed.col, targetParsed.col) // [1, 2] массив с номерами колонок
 
     // 1 способ
-    // for (let i = 0; i <= rows.length; i++) {
-    //   for (let j = 0; j <= rows.length; j++) {
-    //     const $cell = this.$root.querySelector(`[data-number-row="${rows[i]}"] .excel-table__row-data [data-row-col="${rows[i]}:${cols[j]}"]`)
-    //     // const $cell = this.$root.querySelector(`[data-row-col="${rows[i]}:${cols[j]}"]`)
-    //     if ($cell) {
-    //       $cell.classList.add('selected-group')
-    //     }
-    //   }
-    // }
+    for (let i = 0; i < rows.length; i++) {
+      const $cell = this.$root.querySelector(`#row-${rows[i]}`)
+      for (let j = 0; j < cols.length; j++) {
+        this.group.push($cell.querySelector(`.excel-table__row-data [data-row-col="${rows[i]}:${cols[j]}"]`))
+      }
+    }
 
     // 2 способ
-    const rowCols = cols.reduce((acc, col) => {
-      rows.forEach(row => acc.push(`${row}:${col}`))
-      return acc
-    }, [])
-    this.group = rowCols.map(id => this.$root.querySelector(`[data-row-col="${id}"]`))
-    this.group.forEach(el => el.classList.add('selected-group'))
+    // const rowCols = cols.reduce((acc, col) => {
+    //   rows.forEach(row => acc.push(`${row}:${col}`))
+    //   return acc
+    // }, [])
+    // this.group = rowCols.map(id => this.$root.querySelector(`[data-row-col="${id}"]`))
 
-    function range(start, end) {
-      const lengthArr = (start <= end) ? end - start + 1 : start - end + 1
-      const firstNum = (start <= end) ? start : end
-      return new Array(lengthArr) // в скобках задаем длину массива
-          .fill('')
-          .map( (_, index) => firstNum + index)
-    }
+    this.group.forEach(el => el.classList.add('selected-group'))
   }
 }
 
+// create array заполненный от start до end (if (start: 2, end: 5) то получим [2,3,4,5])
+function range(start, end) {
+  const lengthArr = (start <= end) ? end - start + 1 : start - end + 1
+  const firstNum = (start <= end) ? start : end
+  return new Array(lengthArr) // в скобках задаем длину массива
+      .fill('')
+      .map( (_, index) => firstNum + index)
+}
