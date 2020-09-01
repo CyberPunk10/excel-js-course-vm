@@ -1,4 +1,5 @@
 import { $ } from '@core/dom'
+import { range } from '@core/utils'
 
 export class TableSelection {
   static className = 'selected'
@@ -51,13 +52,4 @@ export class TableSelection {
 
     this.group.forEach(el => el.classList.add('selected-group'))
   }
-}
-
-// create array заполненный от start до end (if (start: 2, end: 5) то получим [2,3,4,5])
-function range(start, end) {
-  const lengthArr = (start <= end) ? end - start + 1 : start - end + 1
-  const firstNum = (start <= end) ? start : end
-  return new Array(lengthArr) // в скобках задаем длину массива
-      .fill('')
-      .map( (_, index) => firstNum + index)
 }
