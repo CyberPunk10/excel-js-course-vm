@@ -2,6 +2,7 @@ import { ExcelComponent } from '../../core/ExcelComponent'
 import { createTable } from './table.template'
 import { resizeHandler } from './table.resize'
 import { TableSelection } from './TableSelection'
+import { getNextCell } from './table.functions'
 
 export class Table extends ExcelComponent {
   static className = 'excel-table'
@@ -11,6 +12,8 @@ export class Table extends ExcelComponent {
       name: 'Table',
       listeners: ['mousedown', 'keydown']
     })
+    this.rowsCount = 12
+    this.colsCount = 26
   }
 
   // этот метод выполняется до  метода init, а значит здесь мы можем подготовить данные для init
@@ -24,7 +27,7 @@ export class Table extends ExcelComponent {
     this.selection.select($cell)
   }
   toHTML(selector) {
-    selector.innerHTML = createTable(24)
+    selector.innerHTML = createTable(this.rowsCount)
     return selector
   }
 
@@ -55,13 +58,11 @@ export class Table extends ExcelComponent {
       'ArrowDown',
       'ArrowUp'
     ]
-
     if (keys.includes(event.key)) {
       event.preventDefault()
-      console.log(event.key)
-      console.log(event.target)
-      console.log(this.$root)
-      nextCellSelection(event.target)
+      const nextCell = getNextCell(this.$root, this.rowsCount, this.colsCount)
+      this.selection.select(nextCell)
+      nextCell.focus()
     }
   }
 
@@ -74,8 +75,3 @@ export class Table extends ExcelComponent {
   // }
 }
 
-function nextCellSelection($target) {
-  // const row = $target.dataset.rowCol.split(':')[0]
-  // const numberNextCol = ++$target.dataset.rowCol.split(':')[1]
-  // return $root.querySelector(`[data-row-col="${row}:${numberNextCol}"]`)
-}

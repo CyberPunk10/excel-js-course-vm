@@ -39,7 +39,7 @@ export class TableSelection {
     for (let i = 0; i < rows.length; i++) {
       const $cell = this.$root.querySelector(`#row-${rows[i]}`)
       for (let j = 0; j < cols.length; j++) {
-        this.group.push($cell.querySelector(`.excel-table__row-data [data-row-col="${rows[i]}:${cols[j]}"]`))
+        this.group.push($cell.querySelector(`.excel-table__row-data > [data-row-col="${rows[i]}:${cols[j]}"]`))
       }
     }
 
