@@ -9,6 +9,7 @@ export class ExcelComponent extends DomListener {
     this.prepare()
   }
 
+  // Настраиваем компонент до init
   prepare() {
 
   }
@@ -18,6 +19,9 @@ export class ExcelComponent extends DomListener {
     return ''
   }
 
+  $emit
+  // Инициализируем компонент
+  // Добавляем DOM слушателей
   init() {
     this.initDOMListeners()
   }
