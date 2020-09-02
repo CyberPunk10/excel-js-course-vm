@@ -7,7 +7,7 @@ export class TableSelection {
   constructor($root) {
     this.$root = $root
     this.group = [] // место для хранения выбранных ячеек
-    this.startCell = null // первая ячейка при выборе нескольких ячеек с помощью SHIFT
+    this.startCell = null // первая ячейка при выборе нескольких ячеек с помощью SHIFT, а также текущая ячейка при обычном выборе кликом
   }
 
   select($el) {

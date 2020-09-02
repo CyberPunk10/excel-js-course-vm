@@ -1,10 +1,11 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
 
 export class Header extends ExcelComponent {
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Header',
-      listeners: ['input', 'click']
+      listeners: ['input', 'click'],
+      ...options
     })
   }
 

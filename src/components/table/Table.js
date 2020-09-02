@@ -7,10 +7,11 @@ import { getNextCell } from './table.functions'
 export class Table extends ExcelComponent {
   static className = 'excel-table'
 
-  constructor($root) {
+  constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown']
+      listeners: ['mousedown', 'keydown'],
+      ...options
     })
     this.rowsCount = 12
     this.colsCount = 26
@@ -25,6 +26,10 @@ export class Table extends ExcelComponent {
     super.init() // вызов родительского метода (иначе будет перезатирание)
     const $cell = this.$root.querySelector('[data-row-col="1:1"]')
     this.selection.select($cell)
+    this.emitter.subscribe('it is working', text => {
+      this.selection.startCell.innerHTML = text
+      console.log('Table from Formula', text)
+    })
   }
   toHTML(selector) {
     selector.innerHTML = createTable(this.rowsCount)
@@ -58,7 +63,7 @@ export class Table extends ExcelComponent {
       'ArrowDown',
       'ArrowUp'
     ]
-    if (keys.includes(event.key)) {
+    if (keys.includes(event.key) && !event.shiftKey) {
       event.preventDefault()
       const nextCell = getNextCell(this.$root, this.rowsCount, this.colsCount)
       this.selection.select(nextCell)
