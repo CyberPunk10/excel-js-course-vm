@@ -26,11 +26,17 @@ export class Table extends ExcelComponent {
     super.init() // вызов родительского метода (иначе будет перезатирание)
     const $cell = this.$root.querySelector('[data-row-col="1:1"]')
     this.selection.select($cell)
-    this.emitter.subscribe('it is working', text => {
+
+    this.$on('Formula:input', text => {
       this.selection.startCell.innerHTML = text
-      console.log('Table from Formula', text)
+      console.log('Formula:input', text)
+    })
+
+    this.$on('Formula:done', () => {
+      this.selection.startCell.focus()
     })
   }
+
   toHTML(selector) {
     selector.innerHTML = createTable(this.rowsCount)
     return selector

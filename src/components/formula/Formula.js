@@ -6,7 +6,7 @@ export class Formula extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Formula',
-      listeners: ['input'],
+      listeners: ['input', 'keydown'],
       ...options
     })
   }
@@ -20,8 +20,18 @@ export class Formula extends ExcelComponent {
   }
 
   onInput() {
-    const text = event.target.textContent.trim()
-    this.emitter.emit('it is working', text)
+    const target = event.target
+    // eslint-disable-next-line max-len
+    const text = target.tagName === 'INPUT' ? target.value.trim() : target.textContent.trim()
+
+    this.$emit('Formula:input', text)
+  }
+
+  onKeydown() {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.$emit('Formula:done')
+    }
   }
 }
 
