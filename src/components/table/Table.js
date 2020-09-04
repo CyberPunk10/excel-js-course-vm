@@ -3,6 +3,7 @@ import { createTable } from './table.template'
 import { resizeHandler } from './table.resize'
 import { TableSelection } from './TableSelection'
 import { getNextCell } from './table.functions'
+import * as actions from '../../redux/actions'
 
 export class Table extends ExcelComponent {
   static className = 'excel-table'
@@ -10,7 +11,7 @@ export class Table extends ExcelComponent {
   constructor($root, options) {
     super($root, {
       name: 'Table',
-      listeners: ['mousedown', 'keydown'],
+      listeners: ['mousedown', 'keydown', 'input'],
       ...options
     })
     this.rowsCount = 12
@@ -26,6 +27,7 @@ export class Table extends ExcelComponent {
     super.init() // вызов родительского метода (иначе будет перезатирание)
     const $cell = this.$root.querySelector('[data-row-col="1:1"]')
     this.selection.select($cell)
+    this.$emit('Table:select', $cell)
 
     this.$on('Formula:input', text => {
       this.selection.startCell.innerHTML = text
@@ -38,7 +40,7 @@ export class Table extends ExcelComponent {
   }
 
   toHTML(selector) {
-    selector.innerHTML = createTable(this.rowsCount)
+    selector.innerHTML = createTable(this.rowsCount, this.store.getState())
     return selector
   }
 
@@ -50,13 +52,22 @@ export class Table extends ExcelComponent {
     // console.log('mousedown', event.target.getAttribute('data-resize')) // возвращает строку
     // console.log('mousedown', event.target.dataset) // второй вариант, который возвращает объект с data-атрибутами
     if (event.target.dataset.resize) {
-      resizeHandler(this.$root)
+      this.resizeTable()
     } else if (event.target.dataset.rowCol) {
       if (event.shiftKey) {
         this.selection.selectGroup(event.target)
       } else {
         this.selection.select(event.target)
       }
+    }
+  }
+
+  async resizeTable() {
+    try {
+      const data = await resizeHandler(this.$root)
+      this.$dispatch(actions.tableResize(data))
+    } catch (error) {
+      console.warn('Resize error', error.message)
     }
   }
 
@@ -71,10 +82,15 @@ export class Table extends ExcelComponent {
     ]
     if (keys.includes(event.key) && !event.shiftKey) {
       event.preventDefault()
-      const nextCell = getNextCell(this.$root, this.rowsCount, this.colsCount)
-      this.selection.select(nextCell)
-      nextCell.focus()
+      const $nextCell = getNextCell(this.$root, this.rowsCount, this.colsCount)
+      this.selection.select($nextCell)
+      $nextCell.focus()
+      this.$emit('Table:select', $nextCell)
     }
+  }
+
+  onInput(event) {
+    this.$emit('Table:input', event.target)
   }
 
   // onMousemove(event) {
