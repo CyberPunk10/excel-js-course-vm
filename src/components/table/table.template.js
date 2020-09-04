@@ -1,7 +1,7 @@
-export function createTable(rowsCount = 21) {
+export function createTable(rowsCount = 21, state = {}) {
   let html = ''
   for (let i = 0; i <= rowsCount; i++) {
-    html += createRow(i) // numberRow
+    html += createRow(i, state) // numberRow
   }
   return html
 }
@@ -12,16 +12,19 @@ const CODES = {
   'varForIndex': 64
 }
 
+// const DEFAULT_COL = 120
+// const DEFAULT_ROW = 20
+
 function toChar(charCode) {
   return String.fromCharCode(charCode)
 }
 
-function createRow(numberRow) {
+function createRow(numberRow, state) {
   const colsCount = CODES.Z - CODES.A
   let fullCol = ''
 
   for (let i = 0; i <= colsCount; i++) {
-    fullCol += createCol(numberRow, CODES.A + i)
+    fullCol += createCol(numberRow, CODES.A + i, state.colState)
   }
 
   const html = `
@@ -36,17 +39,19 @@ function createRow(numberRow) {
   return html
 }
 
-function createCol(numberRow, charCode) {
+function createCol(numberRow, charCode, colState) {
   const numberCol = charCode - CODES.varForIndex
+  const width = colState[numberCol] ? `style="width: ${colState[numberCol]}px"` : ''
+
   if (!numberRow) { // если это 0-вая строка, то записывем в неё charCode
     return `
-      <div class="excel-table__column" data-type="resizable" data-number-col="${numberCol}">
+      <div class="excel-table__column" data-type="resizable" data-number-col="${numberCol}" ${width}>
         ${toChar(charCode)}
         <div class="col-resize" data-resize="col"></div>
       </div>
     `
   }
   return `
-  <div class="excel-table__cell" contenteditable data-number-col="${numberCol}" data-row-col="${numberRow}:${numberCol}"></div>
+  <div class="excel-table__cell" contenteditable data-number-col="${numberCol}" data-row-col="${numberRow}:${numberCol}" ${width}></div>
 `
 }
