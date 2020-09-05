@@ -49,7 +49,8 @@ export function resizeHandler($root) {
         })
         resolve({
           target: targetCol,
-          value: value < 24 ? 60 : value
+          value: value < 40 ? 40 : value,
+          type
         })
       } else {
         targetRowCells.forEach(element => {
@@ -57,7 +58,8 @@ export function resizeHandler($root) {
         })
         resolve({
           target: targetRow,
-          value: value < 20 ? 20 : value
+          value: value < 24 ? 24 : value,
+          type
         })
       }
     })

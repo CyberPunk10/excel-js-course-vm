@@ -4,6 +4,7 @@ import { resizeHandler } from './table.resize'
 import { TableSelection } from './TableSelection'
 import { getNextCell } from './table.functions'
 import * as actions from '../../redux/actions'
+// import { storage } from '../../core/utils'
 
 export class Table extends ExcelComponent {
   static className = 'excel-table'
@@ -31,7 +32,8 @@ export class Table extends ExcelComponent {
 
     this.$on('Formula:input', text => {
       this.selection.startCell.innerHTML = text
-      console.log('Formula:input', text)
+      this.updateTextInStore(text)
+      // console.log('Formula:input', text)
     })
 
     this.$on('Formula:done', () => {
@@ -89,8 +91,15 @@ export class Table extends ExcelComponent {
     }
   }
 
+  updateTextInStore(content) {
+    this.$dispatch(actions.changeText({
+      id: this.selection.startCell.getAttribute('data-row-col'),
+      text: content
+    }))
+  }
   onInput(event) {
-    this.$emit('Table:input', event.target)
+    // this.$emit('Table:input', event.target) // обычный эмиттер (без store)
+    this.updateTextInStore(event.target.textContent.trim())
   }
 
   // onMousemove(event) {

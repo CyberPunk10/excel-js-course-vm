@@ -22,9 +22,9 @@ export class Excel {
       const component = new Component($el, componentOptions)
 
       // DEBUG
-      if (component.name) {
-        window['c' + component.name] = component
-      }
+      // if (component.name) {
+      //   window['c' + component.name] = component
+      // }
 
       $root.append(component.toHTML($el))
       return component
