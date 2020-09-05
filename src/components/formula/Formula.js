@@ -20,13 +20,14 @@ export class Formula extends ExcelComponent {
       this.$formula.textContent = $cell.textContent
     })
 
-    this.$on('Table:input', $cell => {
-      this.$formula.textContent = $cell.textContent
-    })
-
-    // this.$subscribe( state => {
-    //   console.log('Formula', state)
+    // this.$on('Table:input', $cell => {
+    //   this.$formula.textContent = $cell.textContent
     // })
+
+    this.$subscribe( state => {
+      console.log('Formula', state)
+      this.$formula.textContent = state.currentText
+    })
   }
 
   toHTML(selector) {
