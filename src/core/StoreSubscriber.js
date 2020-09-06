@@ -13,11 +13,10 @@ export class StoreSubscriber {
 
     this.sub = this.store.subscribe(state => {
       Object.keys(state).forEach(key => {
-        console.log(key)
         if (!isEqual(this.prevState[key], state[key])) {
           components.forEach(component => {
             if (component.subscribe.includes(key)) {
-              console.log(component.subscribe, key)
+              // console.log(component.subscribe, key)
               const changes = {[key]: state[key]}
               component.storeChanged(changes)
             }

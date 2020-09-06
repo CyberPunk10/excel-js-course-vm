@@ -60,6 +60,7 @@ export class Table extends ExcelComponent {
         this.selection.selectGroup(event.target)
       } else {
         this.selection.select(event.target)
+        this.$emit('Table:select', event.target)
       }
     }
   }
