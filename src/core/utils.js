@@ -19,3 +19,12 @@ export function storage(key, data = null) {
   }
   localStorage.setItem(key, JSON.stringify(data))
 }
+
+export function isEqual(a, b) {
+  // console.log(JSON.stringify(a))
+  // console.log(JSON.stringify(b))
+  if (typeof a === 'object' && typeof b === 'object') {
+    return JSON.stringify(a) === JSON.stringify(b) // будет работать, если н будут использоваться сложные структуры данных (enw Date, Map, Set..)
+  }
+  return a === b
+}
