@@ -1,6 +1,7 @@
-import { ExcelComponent } from '../../core/ExcelComponent';
+import { ExcelStateComponent } from '../../core/ExcelStateComponent';
+import { createToolbar } from './toolbar.template';
 
-export class Toolbar extends ExcelComponent {
+export class Toolbar extends ExcelStateComponent {
   static className = 'excel-toolbar'
 
   constructor($root, options) {
@@ -11,20 +12,37 @@ export class Toolbar extends ExcelComponent {
     })
   }
 
-  toHTML(selector) {
-    selector.innerHTML = `
-      <div class="excel-toolbar__button"><span class="material-icons">format_bold</span></div>
-      <div class="excel-toolbar__button"><span class="material-icons">format_italic</span></div>
-      <div class="excel-toolbar__button"><span class="material-icons">format_underlined</span></div>
-      <div class="excel-toolbar__button"><span class="material-icons">format_align_left</span></div>
-      <div class="excel-toolbar__button"><span class="material-icons">format_align_center</span></div>
-      <div class="excel-toolbar__button"><span class="material-icons">format_align_right</span></div>
+  prepare() {
+    const initialState = {
+      textAlign: 'left',
+      fontWeight: 'normal',
+      textDecoration: 'none',
+      fontStyle: 'normal'
+    }
+    this.initState({initialState})
+  }
 
-    `
+  get template() {
+    return createToolbar(this.state)
+  }
+
+  toHTML(selector) {
+    selector.innerHTML = this.template
     return selector
   }
 
+  // toHTML(selector) {
+  //   selector.innerHTML = createToolbar()
+  //   return selector
+  // }
+
   onClick(event) {
-    console.log('Click on Toolbar!', event.target)
+    const $target = event.target
+    if ($target.getAttribute('data-type') === 'button') {
+      const value = JSON.parse($target.dataset.value)
+      const key = Object.keys(value)[0]
+      this.setState({[key]: value[key]})
+      console.log(this.state)
+    }
   }
 }
