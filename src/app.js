@@ -12,7 +12,7 @@ import './main.sass'
 const store = createStore(rootReducer, initialState)
 
 store.subscribe(state => {
-  console.log('App', state)
+  // console.log('App', state)
   storage('excel-state', state)
 })
 
