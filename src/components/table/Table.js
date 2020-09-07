@@ -39,6 +39,10 @@ export class Table extends ExcelComponent {
     this.$on('Formula:done', () => {
       this.selection.startCell.focus()
     })
+
+    this.$on('toolbar:applyStyle', style => {
+      console.log('Table style: ', style)
+    })
   }
 
   toHTML() {

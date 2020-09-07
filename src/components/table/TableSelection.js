@@ -52,4 +52,8 @@ export class TableSelection {
 
     this.group.forEach(el => el.classList.add('selected-group'))
   }
+
+  applyStyle(style) {
+    console.log(style)
+  }
 }

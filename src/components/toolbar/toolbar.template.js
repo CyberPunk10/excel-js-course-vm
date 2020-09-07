@@ -1,34 +1,35 @@
 export function createToolbar(state) {
-  console.log(state)
+  // console.log(state)
+  // config генерируется на основе передаваемого state
   const configBtn = [
     {
       icon: 'format_bold',
-      active: false,
-      value: {fontWeight: 'bold'}
+      active: state['fontWeight'] === 'bold', // если равно, значит true
+      value: {fontWeight: state['fontWeight'] === 'bold' ? 'normal' : 'bold'} // значение, которое будет взято при следующем клике и передано в state, который после снова передаётся сюда и снова меняет config
     },
     {
       icon: 'format_italic',
-      active: false,
-      value: {fontStyle: 'italic'}
+      active: state['fontStyle'] === 'italic',
+      value: {fontStyle: state['fontStyle'] === 'italic' ? 'normal' : 'italic'}
     },
     {
       icon: 'format_underlined',
-      active: true,
-      value: {textDecoration: 'underline'}
+      active: state['textDecoration'] === 'underline',
+      value: {textDecoration: state[`textDecoration`] === 'underline' ? 'none' : 'underline'}
     },
     {
       icon: 'format_align_left',
-      active: false,
+      active: state['textAlign'] === 'left',
       value: {textAlign: 'left'}
     },
     {
       icon: 'format_align_center',
-      active: false,
+      active: state['textAlign'] === 'center',
       value: {textAlign: 'center'}
     },
     {
       icon: 'format_align_right',
-      active: false,
+      active: state['textAlign'] === 'right',
       value: {textAlign: 'right'}
     }
   ]

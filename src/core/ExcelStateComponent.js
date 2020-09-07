@@ -7,6 +7,7 @@ export class ExcelStateComponent extends ExcelComponent {
   }
 
   get template() {
+    // console.log(JSON.stringify(this.state, null, 2))
     return JSON.stringify(this.state, null, 2)
   }
 
@@ -15,7 +16,8 @@ export class ExcelStateComponent extends ExcelComponent {
   }
 
   setState(newState) {
+    // console.log(this.$root)
     this.state = {...this.state, ...newState}
-    // this.$root.html(this.template)
+    this.$root.innerHTML = this.template
   }
 }

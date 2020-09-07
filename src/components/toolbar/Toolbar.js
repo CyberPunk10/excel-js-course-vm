@@ -39,9 +39,10 @@ export class Toolbar extends ExcelStateComponent {
     const $target = event.target
     if ($target.getAttribute('data-type') === 'button') {
       const value = JSON.parse($target.dataset.value)
+      this.$emit('toolbar:applyStyle', value)
+
       const key = Object.keys(value)[0]
       this.setState({[key]: value[key]})
-      console.log(this.state)
     }
   }
 }
