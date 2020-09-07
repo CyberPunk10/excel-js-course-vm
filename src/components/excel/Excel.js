@@ -22,13 +22,15 @@ export class Excel {
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className)
       const component = new Component($el, componentOptions)
+      $el.innerHTML = component.toHTML()
 
       // DEBUG
       // if (component.name) {
       //   window['c' + component.name] = component
       // }
 
-      $root.append(component.toHTML($el))
+      // $root.append(component.toHTML($el))
+      $root.append($el)
       return component
     })
 

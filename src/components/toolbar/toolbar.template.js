@@ -1,4 +1,5 @@
-export function createToolbar() {
+export function createToolbar(state) {
+  console.log(state)
   const configBtn = [
     {
       icon: 'format_bold',
@@ -13,7 +14,7 @@ export function createToolbar() {
     {
       icon: 'format_underlined',
       active: true,
-      value: {fontDecoration: 'underline'}
+      value: {textDecoration: 'underline'}
     },
     {
       icon: 'format_align_left',
@@ -31,7 +32,7 @@ export function createToolbar() {
       value: {textAlign: 'right'}
     }
   ]
-  console.log('jkdsfj')
+
   return configBtn.map(templateButton).join('')
 }
 
