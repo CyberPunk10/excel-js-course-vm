@@ -19,16 +19,15 @@ export class Toolbar extends ExcelStateComponent {
       textDecoration: 'none',
       fontStyle: 'normal'
     }
-    this.initState({initialState})
+    this.initState(initialState)
   }
 
   get template() {
     return createToolbar(this.state)
   }
 
-  toHTML(selector) {
-    selector.innerHTML = this.template
-    return selector
+  toHTML() {
+    return this.template
   }
 
   // toHTML(selector) {

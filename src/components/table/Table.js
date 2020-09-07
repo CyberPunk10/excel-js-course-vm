@@ -41,9 +41,8 @@ export class Table extends ExcelComponent {
     })
   }
 
-  toHTML(selector) {
-    selector.innerHTML = createTable(this.rowsCount, this.store.getState())
-    return selector
+  toHTML() {
+    return createTable(this.rowsCount, this.store.getState())
   }
 
   // onClick(event) {

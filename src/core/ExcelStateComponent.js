@@ -15,29 +15,7 @@ export class ExcelStateComponent extends ExcelComponent {
   }
 
   setState(newState) {
-    console.log(this.state)
-    console.log(newState)
-    // this.state = {...this.state, ...newState}
-    const key = Object.keys(newState)
-    // Object.keys(this.state).forEach(key => {
-    //   if (!isEqual(this.state[key], newState[key])) {
-    //     this.state[key] = newState[key]
-    //   }
-    // })
-    this.state[key] = newState[key]
+    this.state = {...this.state, ...newState}
     // this.$root.html(this.template)
   }
 }
-
-
-// Object.keys(state).forEach(key => {
-//   if (!isEqual(this.prevState[key], state[key])) {
-//     components.forEach(component => {
-//       if (component.subscribe.includes(key)) {
-//         // console.log(component.subscribe, key)
-//         const changes = {[key]: state[key]}
-//         component.storeChanged(changes)
-//       }
-//     })
-//   }
-// })
