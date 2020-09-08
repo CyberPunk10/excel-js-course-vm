@@ -33,6 +33,12 @@ class Dom {
   on(eventType, fn) {
     this.$el.addEventListener(eventType, fn)
   }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach(key => {
+      this.$el.style[key] = styles[key]
+    })
+  }
 }
 
 export function $(selector) {

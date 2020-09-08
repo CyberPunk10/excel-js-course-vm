@@ -41,7 +41,7 @@ export class Table extends ExcelComponent {
     })
 
     this.$on('toolbar:applyStyle', style => {
-      console.log('Table style: ', style)
+      this.selection.applyStyle(style)
     })
   }
 
