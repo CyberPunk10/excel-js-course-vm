@@ -37,7 +37,7 @@ export class TableSelection {
 
     // 1 способ
     for (let i = 0; i < rows.length; i++) {
-      const $cell = this.$root.querySelector(`#row-${rows[i]}`)
+      const $cell = this.$root.querySelector(`[data-number-row="${rows[i]}"]`)
       for (let j = 0; j < cols.length; j++) {
         this.group.push($cell.querySelector(`.excel-table__row-data > [data-row-col="${rows[i]}:${cols[j]}"]`))
       }
@@ -54,6 +54,6 @@ export class TableSelection {
   }
 
   applyStyle(style) {
-    console.log(style)
+    this.group.forEach($el => $($el).css(style))
   }
 }
