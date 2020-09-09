@@ -39,6 +39,13 @@ class Dom {
       this.$el.style[key] = styles[key]
     })
   }
+
+  getStyles(styles = []) {
+    return styles.reduce((result, propertyStyle) => {
+      result[propertyStyle] = this.$el.style[propertyStyle]
+      return result
+    }, {})
+  }
 }
 
 export function $(selector) {
