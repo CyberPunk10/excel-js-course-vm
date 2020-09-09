@@ -24,4 +24,3 @@ const excel = new Excel('#app', {
 excel.render()
 
 
-// выделение ячеек с shift слмалось - посмотреть

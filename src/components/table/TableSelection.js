@@ -1,5 +1,6 @@
 import { $ } from '@core/dom'
 import { range } from '@core/utils'
+import { defaultStyles } from '../../constans'
 
 export class TableSelection {
   static className = 'selected'
@@ -15,6 +16,8 @@ export class TableSelection {
     this.group.push($el)
     $el.classList.add(TableSelection.className)
     this.startCell = $el
+
+    console.log($($el).getStyles(Object.keys(defaultStyles)))
   }
 
   // очищает массив выбранных ячеек и удаляет класс .selected

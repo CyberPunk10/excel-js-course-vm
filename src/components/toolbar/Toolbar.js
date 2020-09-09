@@ -1,5 +1,6 @@
-import { ExcelStateComponent } from '../../core/ExcelStateComponent';
-import { createToolbar } from './toolbar.template';
+import { ExcelStateComponent } from '../../core/ExcelStateComponent'
+import { createToolbar } from './toolbar.template'
+import { defaultStyles } from '../../constans'
 
 export class Toolbar extends ExcelStateComponent {
   static className = 'excel-toolbar'
@@ -13,13 +14,7 @@ export class Toolbar extends ExcelStateComponent {
   }
 
   prepare() {
-    const initialState = {
-      textAlign: 'left',
-      fontWeight: 'normal',
-      textDecoration: 'none',
-      fontStyle: 'normal'
-    }
-    this.initState(initialState)
+    this.initState(defaultStyles) // экспортируем значение по умолчанию из constants.js
   }
 
   get template() {
