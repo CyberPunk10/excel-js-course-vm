@@ -9,8 +9,9 @@ export function createToolbar(state) {
     },
     {
       icon: 'format_italic',
-      active: state['fontStyle'] === 'italic',
-      value: {fontStyle: state['fontStyle'] === 'italic' ? 'normal' : 'italic'}
+      active: state['fontStyle'] && state['fontStyle'] === 'italic',
+      // eslint-disable-next-line max-len
+      value: {fontStyle: state['fontStyle'] && state['fontStyle'] === 'italic' ? 'normal' : 'italic'}
     },
     {
       icon: 'format_underlined',
