@@ -4,6 +4,8 @@ import { resizeHandler } from './table.resize'
 import { TableSelection } from './TableSelection'
 import { getNextCell } from './table.functions'
 import * as actions from '../../redux/actions'
+// import { defaultStyles } from '../../constans'
+import { $ } from '../../core/dom'
 // import { storage } from '../../core/utils'
 
 export class Table extends ExcelComponent {
@@ -40,8 +42,15 @@ export class Table extends ExcelComponent {
       this.selection.startCell.focus()
     })
 
-    this.$on('toolbar:applyStyle', style => {
-      this.selection.applyStyle(style)
+    this.$on('toolbar:applyStyle', value => {
+      this.selection.applyStyle(value)
+      this.$dispatch(actions.applyStyle({
+        value,
+        ids: this.selection.group.map(el => {
+          console.log(el.dataset.rowCol)
+          return el.dataset.rowCol
+        })
+      }))
     })
   }
 
@@ -64,6 +73,12 @@ export class Table extends ExcelComponent {
       } else {
         this.selection.select(event.target)
         this.$emit('Table:select', event.target)
+        const state = this.store.getState()
+        // eslint-disable-next-line max-len
+        const styles = $(event.target).getStyles(Object.keys(state.currentStyles))
+        // const styles = $(event.target).getStyles(Object.keys(defaultStyles))
+        console.log(styles, state.currentStyles)
+        this.$dispatch(actions.changeStyles(styles))
       }
     }
   }
