@@ -1,10 +1,10 @@
 import { TABLE_RESIZE, CHANGE_TEXT, APPLY_STYLE,
-  CURRENT_STYLE_CELL } from './types'
+  CHANGE_STYLES } from './types'
 
 export function rootReducer(state, action) {
   let newState
   let field
-  // console.log('Action: ', action)
+  console.log('Action: ', action)
   switch (action.type) {
     case TABLE_RESIZE:
       field = action.data.type === 'col' ? 'colState' : 'rowState'
@@ -18,12 +18,11 @@ export function rootReducer(state, action) {
       newState[action.data.id] = action.data.text
       return {...state, currentText: action.data.text, dataState: newState}
 
-    case APPLY_STYLE:
+    case APPLY_STYLE: // по нажатию btns in toolbar применяются стили к выбранной ячейке и МЕНЯЕТСЯ STORE
       console.log(action)
       return {...state}
 
-    case CURRENT_STYLE_CELL:
-      console.log(action)
+    case CHANGE_STYLES: // перерисовка toolbar - при выборе ячейки
       return {...state, currentStyles: action.data}
 
     default: return state
