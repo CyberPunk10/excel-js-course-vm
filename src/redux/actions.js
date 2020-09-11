@@ -16,14 +16,14 @@ export function changeText(data) {
   }
 }
 
-export function applyStyle(data) { // по нажатию btns in toolbar применяются стили к выбранной ячейке и МЕНЯЕТСЯ STORE
+export function applyStyle(data) { // по нажатию btns in toolbar применяются стили к выбранной ячейке
   return {
     type: APPLY_STYLE,
     data
   }
 }
 
-export function changeStyles(data) { // перерисовка toolbar - при выборе ячейки
+export function changeStyles(data) { // МЕНЯЕТСЯ STORE и перерисовывается toolbar - при выборе ячейки
   return {
     type: CHANGE_STYLES,
     data
