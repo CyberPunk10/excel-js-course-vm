@@ -66,7 +66,7 @@ function createCol(numberRow, charCode, state) {
   }
   return `
   <div 
-    class="excel-table__cell"
+    class="excel-table__cell bold ta-center"
     contenteditable
     data-number-col="${numberCol}"
     data-row-col="${idCell}"

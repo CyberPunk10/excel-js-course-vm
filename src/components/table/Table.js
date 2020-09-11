@@ -5,7 +5,7 @@ import { TableSelection } from './TableSelection'
 import { getNextCell } from './table.functions'
 import * as actions from '../../redux/actions'
 // import { defaultStyles } from '../../constans'
-import { $ } from '../../core/dom'
+// import { $ } from '../../core/dom'
 // import { storage } from '../../core/utils'
 
 export class Table extends ExcelComponent {
@@ -75,14 +75,27 @@ export class Table extends ExcelComponent {
         this.$emit('Table:select', event.target)
         const state = this.store.getState()
         // eslint-disable-next-line max-len
-        const styles = $(event.target).getStyles(Object.keys(state.currentStyles))
-        const s = event.target.style.cssText
-        console.log(s.split('; '))
-        const a = []
-        s.forEach(el => {
-          a.push(el.split(': '))
-        })
-        console.log(a)
+        // const styles = $(event.target).getStyles(Object.keys(state.currentStyles))
+        const styles = {}
+        if (event.target.matches('.bold')) {
+          styles['fontWeight'] = 'bold'
+        }
+        if (event.target.matches('.ta-left')) {
+          styles['textAlign'] = 'left'
+        }
+        if (event.target.matches('.ta-center')) {
+          styles['textAlign'] = 'center'
+        }
+        if (event.target.matches('.ta-right')) {
+          styles['textAlign'] = 'right'
+        }
+        // const s = event.target.style.cssText
+        // console.log(s.split('; '))
+        // const a = []
+        // s.forEach(el => {
+        //   a.push(el.split(': '))
+        // })
+        // console.log(a)
         // const styles = $(event.target).getStyles(Object.keys(defaultStyles))
         console.log(styles, state.currentStyles)
         this.$dispatch(actions.changeStyles(styles))
