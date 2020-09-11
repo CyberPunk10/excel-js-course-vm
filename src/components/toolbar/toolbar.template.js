@@ -25,7 +25,7 @@ export function createToolbar(state) {
     },
     {
       icon: 'format_align_center',
-      active: state['textAlign'] === 'center',
+      active: state['textAlign'] && state['textAlign'] === 'center',
       value: {textAlign: 'center'}
     },
     {
