@@ -76,6 +76,13 @@ export class Table extends ExcelComponent {
         const state = this.store.getState()
         // eslint-disable-next-line max-len
         const styles = $(event.target).getStyles(Object.keys(state.currentStyles))
+        const s = event.target.style.cssText
+        console.log(s.split('; '))
+        const a = []
+        s.forEach(el => {
+          a.push(el.split(': '))
+        })
+        console.log(a)
         // const styles = $(event.target).getStyles(Object.keys(defaultStyles))
         console.log(styles, state.currentStyles)
         this.$dispatch(actions.changeStyles(styles))
