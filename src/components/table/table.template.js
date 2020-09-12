@@ -1,5 +1,6 @@
 import { toInlineStyles } from '../../core/utils'
 import { defaultStyles } from '../../constans'
+import { parse } from '../../core/parse'
 
 export function createTable(rowsCount = 21, state = {}) {
   let html = ''
@@ -71,13 +72,17 @@ function createCol(numberRow, charCode, state) {
       </div>
     `
   }
+
+  const data = state.dataState[idCell] || ''
+
   return `
   <div 
     class="excel-table__cell"
     contenteditable
     data-number-col="${numberCol}"
     data-row-col="${idCell}"
+    data-value="${data}"
     style="${styles}; ${width}"
-    >${state.dataState[`${idCell}`] || ''}</div>
+    >${parse(data)}</div>
 `
 }

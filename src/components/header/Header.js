@@ -25,8 +25,6 @@ export class Header extends ExcelComponent {
   }
 
   onInput(event) {
-    console.log('[Header] Listener: input', event.target.value.trim())
-    // console.log(event.target.textContent)
     this.$dispatch(changeTitle(event.target.value.trim()))
   }
 
