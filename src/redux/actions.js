@@ -1,5 +1,5 @@
 import { TABLE_RESIZE, CHANGE_TEXT, APPLY_STYLE,
-  CHANGE_STYLES } from './types'
+  CHANGE_STYLES, CHANGE_TITLE} from './types'
 
 // Action Creator
 export function tableResize(data) {
@@ -26,6 +26,13 @@ export function changeStyles(data) { // МЕНЯЕТСЯ STORE и перерис
 export function applyStyle(data) { // по нажатию btns in toolbar применяются стили к выбранной ячейке
   return {
     type: APPLY_STYLE,
+    data
+  }
+}
+
+export function changeTitle(data) {
+  return {
+    type: CHANGE_TITLE,
     data
   }
 }

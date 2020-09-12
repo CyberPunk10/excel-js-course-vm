@@ -1,5 +1,5 @@
 import { TABLE_RESIZE, CHANGE_TEXT, APPLY_STYLE,
-  CHANGE_STYLES } from './types'
+  CHANGE_STYLES, CHANGE_TITLE } from './types'
 
 export function rootReducer(state, action) {
   let newState
@@ -32,6 +32,9 @@ export function rootReducer(state, action) {
 
     case CHANGE_STYLES: // МЕНЯЕТСЯ STORE и перерисовывается toolbar - при выборе ячейки
       return {...state, currentStyles: action.data}
+
+    case CHANGE_TITLE: // МЕНЯЕТСЯ STORE и перерисовывается в header название таблицы - при загрузке страницы
+      return {...state, titleTable: action.data}
 
     default: return state
   }
