@@ -61,8 +61,6 @@ export class TableSelection {
   }
 
   get selectedIds() {
-    const yyyy = this.group.map($el => $el.dataset.rowCol)
-    console.log(yyyy)
-    return yyyy
+    return this.group.map($el => $el.dataset.rowCol)
   }
 }

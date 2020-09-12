@@ -20,15 +20,6 @@ export class Formula extends ExcelComponent {
       // необходима проверка на тег (если input, то менять textContent на value)
       this.$formula.textContent = $cell.textContent
     })
-
-    // this.$on('Table:input', $cell => {
-    //   this.$formula.textContent = $cell.textContent
-    // })
-
-    // this.$subscribe( state => {
-    //   console.log('Formula', state)
-    //   this.$formula.textContent = state.currentText
-    // })
   }
 
   toHTML() {

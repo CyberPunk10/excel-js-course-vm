@@ -4,8 +4,8 @@ import { resizeHandler } from './table.resize'
 import { TableSelection } from './TableSelection'
 import { getNextCell } from './table.functions'
 import * as actions from '../../redux/actions'
-// import { defaultStyles } from '../../constans'
-// import { $ } from '../../core/dom'
+import { defaultStyles } from '../../constans'
+import { $ } from '../../core/dom'
 // import { storage } from '../../core/utils'
 
 export class Table extends ExcelComponent {
@@ -42,16 +42,16 @@ export class Table extends ExcelComponent {
       this.selection.startCell.focus()
     })
 
-    this.$on('toolbar:applyStyle', value => {
+    this.$on('Toolbar:applyStyle', value => {
       this.selection.applyStyle(value)
       this.$dispatch(actions.applyStyle({
         value,
-        ids: this.selection.group.map(el => {
-          console.log(el.dataset.rowCol)
-          return el.dataset.rowCol
-        })
+        ids: this.selection.selectedIds
       }))
     })
+
+    const styles = $($cell).getStyles(Object.keys(defaultStyles))
+    this.$dispatch(actions.changeStyles(styles))
   }
 
   toHTML() {
@@ -73,31 +73,7 @@ export class Table extends ExcelComponent {
       } else {
         this.selection.select(event.target)
         this.$emit('Table:select', event.target)
-        const state = this.store.getState()
-        // eslint-disable-next-line max-len
-        // const styles = $(event.target).getStyles(Object.keys(state.currentStyles))
-        const styles = {}
-        if (event.target.matches('.bold')) {
-          styles['fontWeight'] = 'bold'
-        }
-        if (event.target.matches('.ta-left')) {
-          styles['textAlign'] = 'left'
-        }
-        if (event.target.matches('.ta-center')) {
-          styles['textAlign'] = 'center'
-        }
-        if (event.target.matches('.ta-right')) {
-          styles['textAlign'] = 'right'
-        }
-        // const s = event.target.style.cssText
-        // console.log(s.split('; '))
-        // const a = []
-        // s.forEach(el => {
-        //   a.push(el.split(': '))
-        // })
-        // console.log(a)
-        // const styles = $(event.target).getStyles(Object.keys(defaultStyles))
-        console.log(styles, state.currentStyles)
+        const styles = $(event.target).getStyles(Object.keys(defaultStyles))
         this.$dispatch(actions.changeStyles(styles))
       }
     }
@@ -127,6 +103,9 @@ export class Table extends ExcelComponent {
       this.selection.select($nextCell)
       $nextCell.focus()
       this.$emit('Table:select', $nextCell)
+
+      const styles = $($nextCell).getStyles(Object.keys(defaultStyles))
+      this.$dispatch(actions.changeStyles(styles))
     }
   }
 
@@ -136,6 +115,7 @@ export class Table extends ExcelComponent {
       text: content
     }))
   }
+
   onInput(event) {
     // this.$emit('Table:input', event.target) // обычный эмиттер (без store)
     this.updateTextInStore(event.target.textContent.trim())
@@ -149,4 +129,3 @@ export class Table extends ExcelComponent {
   //   console.log('mouseup', event.target)
   // }
 }
-
