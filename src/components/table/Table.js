@@ -6,6 +6,7 @@ import { getNextCell } from './table.functions'
 import * as actions from '../../redux/actions'
 import { defaultStyles } from '../../constans'
 import { $ } from '../../core/dom'
+import { parse } from '../../core/parse'
 // import { storage } from '../../core/utils'
 
 export class Table extends ExcelComponent {
@@ -32,9 +33,11 @@ export class Table extends ExcelComponent {
     this.selection.select($cell)
     this.$emit('Table:select', $cell)
 
-    this.$on('Formula:input', text => {
-      this.selection.startCell.innerHTML = text
-      this.updateTextInStore(text)
+    this.$on('Formula:input', value => {
+      // $(this.selection.startCell).attr('data-value', value)
+      // this.selection.startCell.innerHTML = parse(value)
+      this.renderTextInFormula(value)
+      this.updateTextInStore(value)
     })
 
     this.$on('Formula:done', () => {
@@ -70,6 +73,9 @@ export class Table extends ExcelComponent {
       if (event.shiftKey) {
         this.selection.selectGroup(event.target)
       } else {
+        // математические вычисления value в ячейке, с которой уходим
+        const value = this.selection.startCell.textContent // Если тег INPUT, то надо брать значение из value, а не textContent
+        this.renderTextInFormula(value)
         this.selection.select(event.target)
         this.$emit('Table:select', event.target)
         const styles = $(event.target).getStyles(Object.keys(defaultStyles))
@@ -98,6 +104,12 @@ export class Table extends ExcelComponent {
     ]
     if (keys.includes(event.key) && !event.shiftKey) {
       event.preventDefault()
+
+      // математические вычисления value в ячейке, с которой уходим
+      const value = this.selection.startCell.textContent // Если тег INPUT, то надо брать значение из value, а не textContent
+      this.renderTextInFormula(value)
+
+      // переход на следующую ячейку
       const $nextCell = getNextCell(this.$root, this.rowsCount, this.colsCount)
       this.selection.select($nextCell)
       $nextCell.focus()
@@ -113,6 +125,11 @@ export class Table extends ExcelComponent {
       id: this.selection.startCell.getAttribute('data-row-col'),
       text: content
     }))
+  }
+
+  renderTextInFormula(content) {
+    $(this.selection.startCell).attr('data-value', content)
+    this.selection.startCell.innerHTML = parse(content)
   }
 
   onInput(event) {

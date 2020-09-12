@@ -1,4 +1,5 @@
 import { ExcelComponent } from '../../core/ExcelComponent'
+import { $ } from '../../core/dom'
 
 export class Formula extends ExcelComponent {
   static className = 'excel-formula'
@@ -18,7 +19,7 @@ export class Formula extends ExcelComponent {
 
     this.$on('Table:select', $cell => {
       // необходима проверка на тег (если input, то менять textContent на value)
-      this.$formula.textContent = $cell.textContent
+      this.$formula.textContent = $($cell).attr('data-value')
     })
   }
 
@@ -30,7 +31,7 @@ export class Formula extends ExcelComponent {
   }
 
   storeChanged({currentText}) {
-    // this.$formula.textContent = currentText
+    this.$formula.textContent = currentText
   }
 
   onInput() {

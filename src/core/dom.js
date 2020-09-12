@@ -25,6 +25,15 @@ class Dom {
     return this.$el.textContent.trim()
   }
 
+  attr(name, value) {
+    if (value) {
+      this.$el.setAttribute(name, value)
+      return this
+    } else {
+      return this.$el.getAttribute(name)
+    }
+  }
+
   clear() {
     this.html('')
     return this
