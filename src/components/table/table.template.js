@@ -1,3 +1,6 @@
+import { toInlineStyles } from '../../core/utils'
+import { defaultStyles } from '../../constans'
+
 export function createTable(rowsCount = 21, state = {}) {
   let html = ''
   for (let i = 0; i <= rowsCount; i++) {
@@ -48,8 +51,12 @@ function createCol(numberRow, charCode, state) {
   const numberCol = charCode - CODES.varForIndex
 
   const colState = state.colState
-  const width = colState[numberCol] ? `style="width: ${colState[numberCol]}px"` : ''
   const idCell = `${numberRow}:${numberCol}`
+  const styles = toInlineStyles({
+    ...defaultStyles,
+    ...state.stylesState[idCell]
+  })
+  const width = colState[numberCol] ? `width: ${colState[numberCol]}px;` : ''
 
   if (!numberRow) { // если это 0-вая строка, то записывем в неё charCode
     return `
@@ -57,7 +64,7 @@ function createCol(numberRow, charCode, state) {
         class="excel-table__column" 
         data-type="resizable"
         data-number-col="${numberCol}"
-        ${width}
+        style ="${width}"
         >
           ${toChar(charCode)}
           <div class="col-resize" data-resize="col"></div>
@@ -66,11 +73,11 @@ function createCol(numberRow, charCode, state) {
   }
   return `
   <div 
-    class="excel-table__cell bold ta-center"
+    class="excel-table__cell"
     contenteditable
     data-number-col="${numberCol}"
     data-row-col="${idCell}"
-    ${width}
+    style="${styles}; ${width}"
     >${state.dataState[`${idCell}`] || ''}</div>
 `
 }

@@ -19,8 +19,16 @@ export function rootReducer(state, action) {
       return {...state, currentText: action.data.text, dataState: newState}
 
     case APPLY_STYLE: // по нажатию btns in toolbar применяются стили к выбранной ячейке
-      console.log(action)
-      return {...state}
+      field = 'stylesState'
+      newState = state[field] || {}
+      action.data.ids.forEach(id => {
+        newState[id] = {...newState[id], ...action.data.value}
+      })
+      return {
+        ...state,
+        [field]: newState,
+        currentStyles: {...state.currentStyles, ...action.data.value}
+      }
 
     case CHANGE_STYLES: // МЕНЯЕТСЯ STORE и перерисовывается toolbar - при выборе ячейки
       return {...state, currentStyles: action.data}
