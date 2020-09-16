@@ -106,6 +106,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 8521,
+    historyApiFallback: true // https://github.com/bripkens/connect-history-api-fallback (для Router - не возникает ошибок при переходе на несуществующий адрес)
   },
 
   // в панеле devtool показывает исходный несжатый код и помогает отслеживать исходные файлы этого кода
