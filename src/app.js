@@ -3,7 +3,9 @@ import { DashboardPage } from './pages/DashboardPage'
 import { ExcelPage } from './pages/ExcelPage'
 import './main.sass'
 
-new Router('#app', {
+const $app = document.getElementById('app')
+
+new Router($app, {
   dashboard: DashboardPage,
   excel: ExcelPage
 })
