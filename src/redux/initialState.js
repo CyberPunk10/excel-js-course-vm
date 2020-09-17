@@ -1,4 +1,4 @@
-import { storage } from '../core/utils'
+import { storage, clone } from '../core/utils'
 import { defaultStyles, defaultTitle } from '../constans'
 
 const defaultState = {
@@ -17,6 +17,13 @@ const normalize = state => ({
   currentText: ''
 })
 
-export const initialState = storage('excel-state')
-  ? normalize(storage('excel-state'))
-  : defaultState
+// export const initialState = storage('excel-state')
+//   ? normalize(storage('excel-state'))
+//   : defaultState
+
+export function initialState(params) {
+  console.log(defaultState)
+  return storage('excel:' + params)
+    ? normalize(storage('excel:' + params))
+    : clone(defaultState) // передаём клон, т.к. если будет происходить обращение к defaultState без перезагрузки страницы, то он будет мутированный
+}
