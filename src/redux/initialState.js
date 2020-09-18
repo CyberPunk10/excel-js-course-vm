@@ -8,7 +8,8 @@ const defaultState = {
   stylesState: {}, // {1:1: {'fontWeight': 'bold'}}
   currentText: '',
   currentStyles: defaultStyles, // текущие стили ячейки
-  titleTable: defaultTitle
+  titleTable: defaultTitle,
+  openedDate: new Date().toJSON()
 }
 
 const normalize = state => ({

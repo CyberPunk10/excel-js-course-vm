@@ -1,4 +1,4 @@
-import { ActiveRouter } from './ActiveRouter'
+import { ActiveRoute } from './ActiveRoute'
 
 export class Router {
   constructor(selector, routes) {
@@ -26,11 +26,11 @@ export class Router {
     }
     this.$placeholder.innerHTML = ''
 
-    const Page = ActiveRouter.path.includes('excel')
+    const Page = ActiveRoute.path.includes('excel')
       ? this.routes.excel
       : this.routes.dashboard
 
-    this.page = new Page(ActiveRouter.param)
+    this.page = new Page(ActiveRoute.param)
 
     this.$placeholder.append(this.page.getRoot())
 

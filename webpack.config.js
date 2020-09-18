@@ -6,6 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack')
 
 // helping vars
 const isDev = process.env.NODE_ENV === 'development'
@@ -205,5 +206,8 @@ module.exports = {
       filename: `./css/${filename('css')}`
       // filename: `./css/main.css`
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
   ]
 }
