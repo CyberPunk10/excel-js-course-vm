@@ -1,5 +1,5 @@
 import { TABLE_RESIZE, CHANGE_TEXT, APPLY_STYLE,
-  CHANGE_STYLES, CHANGE_TITLE } from './types'
+  CHANGE_STYLES, CHANGE_TITLE, UPDATE_DATE } from './types'
 
 export function rootReducer(state, action) {
   let newState
@@ -35,6 +35,9 @@ export function rootReducer(state, action) {
 
     case CHANGE_TITLE: // МЕНЯЕТСЯ STORE и перерисовывается в header название таблицы - при загрузке страницы
       return {...state, titleTable: action.data}
+
+    case UPDATE_DATE:
+      return {...state, openedDate: new Date().toJSON()}
 
     default: return state
   }

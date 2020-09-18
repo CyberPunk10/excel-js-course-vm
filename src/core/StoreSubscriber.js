@@ -25,6 +25,10 @@ export class StoreSubscriber {
       })
       // обновляем состояние, после изменения
       this.prevState = this.store.getState()
+
+      if (process.env.NODE_ENV === 'development') {
+        window['redux'] = this.prevState
+      }
     })
   }
 
