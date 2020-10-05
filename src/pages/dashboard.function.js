@@ -41,15 +41,13 @@ export function createTableRecords() {
   const keys = getAllKeys()
 
   if (!keys.length) {
-    return `<p>Вы пока не создали ни одной таблицы</p>`
+    return `<p class="text-align-center">Вы пока не создали ни одной таблицы.</p>`
   }
 
   return `
-    <div class="db__table">
-      <div class="db__list-header"><span>Название</span><span>Дата открытия</span></div>
-      <ul class="db__list">
-        ${ keys.map(toHTML).join('') }
-      </ul>
-    </div>
+    <div class="db__list-header"><span>Название</span><span>Дата открытия</span></div>
+    <ul class="db__list">
+      ${ keys.map(toHTML).join('') }
+    </ul>
   `
 }

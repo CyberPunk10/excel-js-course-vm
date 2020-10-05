@@ -18,6 +18,7 @@ export function createToolbar(state) {
       active: state['textDecoration'] === 'underline',
       value: {textDecoration: state[`textDecoration`] === 'underline' ? 'none' : 'underline'}
     },
+    'separator',
     {
       icon: 'format_align_left',
       active: state['justifyContent'] === 'flex-start',
@@ -33,6 +34,7 @@ export function createToolbar(state) {
       active: state['justifyContent'] === 'flex-end',
       value: {justifyContent: 'flex-end'}
     },
+    'separator',
     {
       icon: 'vertical_align_top',
       active: state['alignItems'] === 'flex-start',
@@ -47,13 +49,24 @@ export function createToolbar(state) {
       icon: 'vertical_align_bottom',
       active: state['alignItems'] === 'flex-end',
       value: {alignItems: 'flex-end'}
-    }
+    },
+    'separator',
+    // {
+    //   icon: 'format_paint',
+    //   active: state['alignItems'] === 'flex-start',
+    //   value: {alignItems: 'flex-start'}
+    // }
   ]
 
   return configBtn.map(templateButton).join('')
 }
 
 function templateButton(button) {
+  if (button === 'separator') {
+    return `
+      <div class="border-right"></div>
+    `
+  }
   const meta = `
     data-type="button"
     data-value='${JSON.stringify(button.value)}'
