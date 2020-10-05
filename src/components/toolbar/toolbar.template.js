@@ -32,6 +32,21 @@ export function createToolbar(state) {
       icon: 'format_align_right',
       active: state['justifyContent'] === 'flex-end',
       value: {justifyContent: 'flex-end'}
+    },
+    {
+      icon: 'vertical_align_top',
+      active: state['alignItems'] === 'flex-start',
+      value: {alignItems: 'flex-start'}
+    },
+    {
+      icon: 'vertical_align_center',
+      active: state['alignItems'] && state['alignItems'] === 'center',
+      value: {alignItems: 'center'}
+    },
+    {
+      icon: 'vertical_align_bottom',
+      active: state['alignItems'] === 'flex-end',
+      value: {alignItems: 'flex-end'}
     }
   ]
 
