@@ -10,12 +10,14 @@ export class DashboardPage extends Page {
     $root.innerHTML = `
       <div class="db">
         <div class="db__header">
-          <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro, tempora!</h1>
+          <h1>Таблицы</h1>
         </div>
         <div class="db__new">
           <div class="db__view"><a class="db__create" href="#excel/${now}">Новая таблица</a></div>
         </div>
-        ${ createTableRecords() }
+        <div class="db__table">
+          ${ createTableRecords() }
+        </div>
       </div>
     `
     return $root
